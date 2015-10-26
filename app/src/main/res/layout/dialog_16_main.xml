@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
+
+    <TextView
+        android:id="@+id/developer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_developer"
+        android:textSize="16sp" />
+
+    <com.wefika.flowlayout.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|top">
+
+        <Button
+            android:id="@+id/main_website"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_website"
+            android:textColor="@color/dialogcolor"
+            android:textSize="16sp" />
+        <Button
+            android:id="@+id/support"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/support"
+            android:textColor="@color/dialogcolor"
+            android:textSize="16sp" />
+
+    </com.wefika.flowlayout.FlowLayout>
+
+    <TextView
+        android:id="@+id/designer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:text="@string/color_picker_developer"
+        android:textSize="16sp" />
+
+</LinearLayout>
