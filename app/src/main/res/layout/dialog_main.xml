@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.38"
             android:text="@string/main_website"
-            android:textColor="@color/dialogcolor" />
+            android:textColor="@color/dialogcolor"
+			android:textSize="16sp"/>
 
         <Button
             android:id="@+id/support"
@@ -47,13 +48,5 @@
         android:paddingTop="16dp"
         android:text="@string/color_picker_developer"
         android:textSize="16sp" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
-    </LinearLayout>
-
+	
 </LinearLayout>
