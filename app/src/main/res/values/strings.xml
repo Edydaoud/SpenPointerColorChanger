@@ -18,5 +18,6 @@
     <string name="color_picker_developer"> Color picker developer <b>Anjith Sasindran</b>\n view color picker about for more info</string>
     <string name="main_text"><b>CHANGE SPEN POINTER TO ANY COLOR, SHOULD WORK ON ANY GALAXY NOTE SERIES, IF YOU FACE ANY PROBLEM VISIT XDA MODULE PAGE AND REPORT YOUR PROBLEM, FOR MORE INFO CHECK ABOUT. \n\n PLEASE REBOOT TO SET POINTER COLOR.</b></string>
     <string name="support">SUPPORT</string>
+    <string name="main_github">GITHUB</string>
 
 </resources>
