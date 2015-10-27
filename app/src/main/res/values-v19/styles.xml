@@ -19,7 +19,7 @@
 
     </style>
 
-    <style name="AppThemeMain" parent="Theme.AppCompat.Light">
+    <style name="AppThemeMain" parent="Theme.AppCompat.Light.NoActionBar">
 
         <!-- No ActionBar & Window Title -->
         <item name="android:windowActionBar">false</item>

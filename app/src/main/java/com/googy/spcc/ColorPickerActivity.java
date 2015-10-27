@@ -216,7 +216,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         PorterDuff.Mode mode = PorterDuff.Mode.SRC_ATOP;
 
         ImageView preview = (ImageView) findViewById(R.id.preview);
-        
+
         preview.setColorFilter(tint, mode);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -412,23 +412,14 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     }
 
     public void getBitmap(int i, String color) {
-        int table[] = {
-                R.drawable.down, R.drawable.left,
-                R.drawable.left_down, R.drawable.left_right_split,
-                R.drawable.left_up, R.drawable.move,
-                R.drawable.plus, R.drawable.pointer,
-                R.drawable.pointer_hover, R.drawable.resize_left,
-                R.drawable.resize_left_right, R.drawable.resize_right,
-                R.drawable.resize_up_down, R.drawable.right,
-                R.drawable.right_down, R.drawable.right_up, R.drawable.select,
-                R.drawable.up, R.drawable.up_down_split};
+        int[] resourcesId = GetArray.resourcesId;
 
         Context mContext = getApplicationContext();
 
-        String name = mContext.getResources().getResourceEntryName(table[i]);
+        String name = mContext.getResources().getResourceEntryName(resourcesId[i]);
 
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),
-                table[i]).copy(Bitmap.Config.ARGB_8888, true);
+                resourcesId[i]).copy(Bitmap.Config.ARGB_8888, true);
 
         Paint paint = new Paint();
         ColorFilter filter = new PorterDuffColorFilter(Color.parseColor(color), PorterDuff.Mode.SRC_IN);

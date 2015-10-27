@@ -140,10 +140,8 @@ public class MainActivity extends Activity {
         li.setBackgroundColor(Color.rgb(red, green, blue));
 
         Button changeColor = (Button) findViewById(R.id.changeColor);
-        changeColor.setBackgroundColor(Color.rgb(red, green, blue));
 
         Button aboutspcc = (Button) findViewById(R.id.aboutspcc);
-        aboutspcc.setBackgroundColor(Color.rgb(red, green, blue));
 
         TextView mainText = (TextView) findViewById(R.id.mainText);
 

@@ -15,7 +15,7 @@
 
     </style>
 
-    <style name="AppThemeMain" parent="Theme.AppCompat.Light">
+    <style name="AppThemeMain" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="android:windowActionBar">false</item>
 
