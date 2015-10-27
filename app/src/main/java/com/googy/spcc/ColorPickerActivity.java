@@ -1,42 +1,20 @@
 package com.googy.spcc;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.Rect;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Display;
-import android.view.Surface;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.app.*;
+import android.content.*;
+import android.content.pm.*;
+import android.graphics.*;
+import android.net.*;
+import android.os.*;
+import android.util.*;
+import android.view.*;
+import android.widget.*;
+import com.afollestad.materialdialogs.*;
+import java.io.*;
+import java.util.*;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
-
-public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
+public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarChangeListener
+{
 
 
     View colorView;
@@ -53,13 +31,17 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+	{
         super.onCreate(savedInstanceState);
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+		{
             setContentView(R.layout.layout_color_picker);
-        } else {
+        }
+		else
+		{
             setContentView(R.layout.layout_16);
         }
 
@@ -98,7 +80,8 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         colorView.setBackgroundColor(Color.rgb(red, green, blue));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+		{
 
             if (display.getRotation() != Surface.ROTATION_90 && display.getRotation() != Surface.ROTATION_270)
                 window.setStatusBarColor(Color.rgb(red, green, blue));
@@ -110,22 +93,25 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         final Button applyButton = (Button) findViewById(R.id.applyButton);
         applyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                onApply();
-            }
-        });
+				public void onClick(View v)
+				{
+					onApply();
+				}
+			});
 
         final Button cancelButyon = (Button) findViewById(R.id.cancelButton);
         cancelButyon.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+				public void onClick(View v)
+				{
+					onBackPressed();
+				}
+			});
 
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
+    public void onWindowFocusChanged(boolean hasFocus)
+	{
 
         thumbRect = redSeekBar.getThumb().getBounds();
 
@@ -160,9 +146,11 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+	{
 
-        if (seekBar.getId() == R.id.redSeekBar) {
+        if (seekBar.getId() == R.id.redSeekBar)
+		{
 
             red = progress;
             thumbRect = seekBar.getThumb().getBounds();
@@ -176,7 +164,9 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             else
                 redToolTip.setText(red + "");
 
-        } else if (seekBar.getId() == R.id.greenSeekBar) {
+        }
+		else if (seekBar.getId() == R.id.greenSeekBar)
+		{
 
             green = progress;
             thumbRect = seekBar.getThumb().getBounds();
@@ -189,7 +179,9 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             else
                 greenToolTip.setText(green + "");
 
-        } else if (seekBar.getId() == R.id.blueSeekBar) {
+        }
+		else if (seekBar.getId() == R.id.blueSeekBar)
+		{
 
             blue = progress;
             thumbRect = seekBar.getThumb().getBounds();
@@ -213,10 +205,26 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         ImageView pointer = (ImageView) findViewById(R.id.pointer);
         ImageView pointer_hover = (ImageView) findViewById(R.id.pointer_hover);
+		ImageView plus = (ImageView) findViewById(R.id.plus);
+		ImageView select= (ImageView) findViewById(R.id.select);
+		ImageView up = (ImageView) findViewById(R.id.up);
+		ImageView down = (ImageView) findViewById(R.id.down);
+		ImageView resize = (ImageView) findViewById(R.id.resize);
+		ImageView split = (ImageView) findViewById(R.id.split);
+		ImageView move = (ImageView) findViewById(R.id. move);
+		
         pointer.setColorFilter(tint, mode);
         pointer_hover.setColorFilter(tint, mode);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+		plus.setColorFilter(tint, mode);
+		select.setColorFilter(tint, mode);
+		up.setColorFilter(tint, mode);
+		down.setColorFilter(tint, mode);
+		resize.setColorFilter(tint, mode);
+		split.setColorFilter(tint, mode);
+		move.setColorFilter(tint, mode);
+		
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+		{
 
             if (display.getRotation() == Surface.ROTATION_0)
                 window.setStatusBarColor(Color.rgb(red, green, blue));
@@ -229,16 +237,19 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
+    public void onStopTrackingTouch(SeekBar seekBar)
+	{
 
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
+    public void onStartTrackingTouch(SeekBar seekBar)
+	{
 
     }
 
-    public void colorSelect(View view) {
+    public void colorSelect(View view)
+	{
 
         //Copies color to Clipboard
         clip = ClipData.newPlainText("clip", buttonSelector.getText());
@@ -248,63 +259,75 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
     }
 
-    public void showDetails(View view) {
+    public void showDetails(View view)
+	{
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+		{
 
             View dialogLayout = View.inflate(this, R.layout.dialog, null);
 
             alertDialog = new AlertDialog.Builder(this)
-                    .setTitle("Material Color Picker")
+				.setTitle("Material Color Picker")
 
-                    .setView(dialogLayout)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
+				.setView(dialogLayout)
+				.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which)
+					{
 
-                        }
-                    })
-                    .show();
+					}
+				})
+				.show();
 
             alertDialog.findViewById(R.id.website).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse("http://www.anjithsasindran.in")));
-                }
-            });
+					public void onClick(View view)
+					{
+						startActivity(new Intent(Intent.ACTION_VIEW)
+									  .setData(Uri.parse("http://www.anjithsasindran.in")));
+					}
+				});
 
             alertDialog.findViewById(R.id.github).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse("https://github.com/4k3R/material-color-picker")));
-                }
-            });
+					public void onClick(View view)
+					{
+						startActivity(new Intent(Intent.ACTION_VIEW)
+									  .setData(Uri.parse("https://github.com/4k3R/material-color-picker")));
+					}
+				});
 
             alertDialog.findViewById(R.id.instagram).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    Uri uri = Uri.parse("http://instagram.com/_u/anjithsasindran");
-                    Intent insta = new Intent(Intent.ACTION_VIEW, uri);
-                    insta.setPackage("com.instagram.android");
+					public void onClick(View view)
+					{
+						Uri uri = Uri.parse("http://instagram.com/_u/anjithsasindran");
+						Intent insta = new Intent(Intent.ACTION_VIEW, uri);
+						insta.setPackage("com.instagram.android");
 
-                    PackageManager packageManager = getBaseContext().getPackageManager();
-                    List<ResolveInfo> list = packageManager.queryIntentActivities(insta, PackageManager.MATCH_DEFAULT_ONLY);
+						PackageManager packageManager = getBaseContext().getPackageManager();
+						List<ResolveInfo> list = packageManager.queryIntentActivities(insta, PackageManager.MATCH_DEFAULT_ONLY);
 
-                    if (list.size() > 0) {
-                        startActivity(insta);
-                    } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/anjithsasindran")));
-                    }
+						if (list.size() > 0)
+						{
+							startActivity(insta);
+						}
+						else
+						{
+							startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/anjithsasindran")));
+						}
 
-                }
-            });
+					}
+				});
 
             alertDialog.findViewById(R.id.dribbble).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse("https://dribbble.com/shots/1858968-Material-Design-colorpicker?list=users&offset=2")));
-                }
-            });
+					public void onClick(View view)
+					{
+						startActivity(new Intent(Intent.ACTION_VIEW)
+									  .setData(Uri.parse("https://dribbble.com/shots/1858968-Material-Design-colorpicker?list=users&offset=2")));
+					}
+				});
 
-        } else {
+        }
+		else
+		{
 
             MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this);
             View dialogLayout = View.inflate(this, R.layout.dialog_16, null);
@@ -316,49 +339,57 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             materialDialog.show();
 
             dialogLayout.findViewById(R.id.website).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse("http://www.anjithsasindran.in")));
-                }
-            });
+					public void onClick(View view)
+					{
+						startActivity(new Intent(Intent.ACTION_VIEW)
+									  .setData(Uri.parse("http://www.anjithsasindran.in")));
+					}
+				});
 
             dialogLayout.findViewById(R.id.github).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse("https://github.com/4k3R/material-color-picker")));
-                }
-            });
+					public void onClick(View view)
+					{
+						startActivity(new Intent(Intent.ACTION_VIEW)
+									  .setData(Uri.parse("https://github.com/4k3R/material-color-picker")));
+					}
+				});
 
             dialogLayout.findViewById(R.id.instagram).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    Uri uri = Uri.parse("http://instagram.com/_u/anjithsasindran");
-                    Intent insta = new Intent(Intent.ACTION_VIEW, uri);
-                    insta.setPackage("com.instagram.android");
+					public void onClick(View view)
+					{
+						Uri uri = Uri.parse("http://instagram.com/_u/anjithsasindran");
+						Intent insta = new Intent(Intent.ACTION_VIEW, uri);
+						insta.setPackage("com.instagram.android");
 
-                    PackageManager packageManager = getBaseContext().getPackageManager();
-                    List<ResolveInfo> list = packageManager.queryIntentActivities(insta, PackageManager.MATCH_DEFAULT_ONLY);
+						PackageManager packageManager = getBaseContext().getPackageManager();
+						List<ResolveInfo> list = packageManager.queryIntentActivities(insta, PackageManager.MATCH_DEFAULT_ONLY);
 
-                    if (list.size() > 0) {
-                        startActivity(insta);
-                    } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/anjithsasindran")));
-                    }
+						if (list.size() > 0)
+						{
+							startActivity(insta);
+						}
+						else
+						{
+							startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/anjithsasindran")));
+						}
 
-                }
-            });
+					}
+				});
 
             dialogLayout.findViewById(R.id.dribbble).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW)
-                            .setData(Uri.parse("https://dribbble.com/shots/1858968-Material-Design-colorpicker?list=users&offset=2")));
-                }
-            });
+					public void onClick(View view)
+					{
+						startActivity(new Intent(Intent.ACTION_VIEW)
+									  .setData(Uri.parse("https://dribbble.com/shots/1858968-Material-Design-colorpicker?list=users&offset=2")));
+					}
+				});
 
         }
 
     }
 
-    public void onApply() {
+    public void onApply()
+	{
 
         String hex = String.format("#%02x%02x%02x", red, green, blue);
         //Storing values of red, green & blue in SharedPreferences
@@ -371,41 +402,9 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         editor.putString("HEX_COLOR", hex);
 
         editor.apply();
-        Context mContext = getApplicationContext();
 
-
-        ImageView iPointer = (ImageView) findViewById(R.id.pointer);
-        ImageView iPointer_hover = (ImageView) findViewById(R.id.pointer_hover);
-        Bitmap bPointer = loadBitmapFromView(iPointer);
-        Bitmap bPointer_hover = loadBitmapFromView(iPointer_hover);
-
-
-        String appPath = mContext.getFilesDir().getAbsolutePath();
-
-        File storagePath = new File(appPath);
-        File fPointer = new File(storagePath, File.separator + "pointer.png");
-        File fPointer_hover = new File(storagePath, File.separator + "pointer_hover.png");
-        FileOutputStream out = null;
-
-        Bitmap scaledPointer = Bitmap.createScaledBitmap(bPointer, 45, 45, false);
-        Bitmap scaledPointerHover = Bitmap.createScaledBitmap(bPointer_hover, 45, 45, false);
-
-        try {
-            out = new FileOutputStream(fPointer);
-            scaledPointer.compress(Bitmap.CompressFormat.PNG, 100, out);
-            out = new FileOutputStream(fPointer_hover);
-            scaledPointerHover.compress(Bitmap.CompressFormat.PNG, 100, out);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+		for (int i = 0 ; i < 19 ; i ++)
+			getBitmap(i, hex);
 
         Toast.makeText(this, "Don't forget to reboot", Toast.LENGTH_SHORT).show();
 
@@ -416,7 +415,8 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+	{
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -426,29 +426,116 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+	{
         super.onDestroy();
 
         //Properly dismissing dialog to prevent errors while changing orientation
-        try {
-            if (alertDialog.isShowing()) {
+        try
+		{
+            if (alertDialog.isShowing())
+			{
                 alertDialog.dismiss();
             }
-        } catch (NullPointerException e) {
+        }
+		catch (NullPointerException e)
+		{
             //do nothing
         }
 
     }
 
-    private Bitmap loadBitmapFromView(View v) {
-        final int w = v.getWidth();
-        final int h = v.getHeight();
-        final Bitmap b = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        final Canvas c = new Canvas(b);
-        //v.layout(0, 0, w, h);
-        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-        v.draw(c);
-        return b;
-    }
+	public void getBitmap(int i, String color)
+	{
+		int table[] ={
+			R.drawable.down, R.drawable.left,
+			R.drawable.left_down, R.drawable.left_right_split,
+			R.drawable.left_up, R.drawable.move,
+			R.drawable.plus, R.drawable.pointer,
+			R.drawable.pointer_hover, R.drawable.resize_left,
+			R.drawable.resize_left_right, R.drawable.resize_right,
+			R.drawable.resize_up_down, R.drawable.right,
+			R.drawable.right_down, R.drawable.right_up, R.drawable.select,
+			R.drawable.up, R.drawable.up_down_split};
 
-}
+		Context mContext = getApplicationContext();
+
+		String name = mContext.getResources().getResourceEntryName(table[i]);
+
+		Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),
+													 table[i]).copy(Bitmap.Config.ARGB_8888, true);
+
+		Paint paint = new Paint();
+		ColorFilter filter = new PorterDuffColorFilter(Color.parseColor(color), PorterDuff.Mode.SRC_IN);
+		paint.setColorFilter(filter);
+
+		Canvas canvasPointer = new Canvas(bitmap);
+		canvasPointer.drawBitmap(bitmap, 0, 0, paint);
+
+
+
+		String appPath = mContext.getFilesDir().getAbsolutePath();
+
+        File storagePath = new File(appPath);
+        File fBimap = new File(storagePath, File.separator + name + ".png");
+		
+		FileOutputStream out = null;
+		if (name.contains("pointer") || name.contains("plus"))
+		{
+			
+			Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 45, 45, false);
+
+			try
+			{
+				out = new FileOutputStream(fBimap);
+				scaledBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            }
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				try
+				{
+					if (out != null)
+					{
+						out.close();
+					}
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+		else
+		{
+			Bitmap scaledBitmap1 = Bitmap.createScaledBitmap(bitmap, 90, 90, false);
+			
+			try
+			{
+				out = new FileOutputStream(fBimap);
+				scaledBitmap1.compress(Bitmap.CompressFormat.PNG, 100, out);
+            }
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				try
+				{
+					if (out != null)
+					{
+						out.close();
+					}
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}}
