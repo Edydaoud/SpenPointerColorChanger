@@ -73,6 +73,12 @@ public class MainActivity extends Activity {
                 }
             });
 
+            alertDialog.findViewById(R.id.main_github).setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    startActivity(new Intent(Intent.ACTION_VIEW)
+                            .setData(Uri.parse("https://github.com/Edydaoud/SpenPointerColorChanger")));
+                }
+            });
         } else {
 
             MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this);
