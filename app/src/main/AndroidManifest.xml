@@ -30,7 +30,7 @@
             android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Changing Spen Pointer Color" />
+            android:value="Change all Spen pointers color" />
         <meta-data
             android:name="xposedminversion"
             android:value="54" />

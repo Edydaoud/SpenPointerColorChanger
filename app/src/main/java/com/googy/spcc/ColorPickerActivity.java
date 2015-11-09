@@ -432,15 +432,14 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         String appPath = mContext.getFilesDir().getAbsolutePath();
 
         File storagePath = new File(appPath);
-        File fBimap = new File(storagePath, File.separator + name + ".png");
-
+        File fBitmap = new File(storagePath, File.separator + name + ".png");
         FileOutputStream out = null;
         if (name.contains("pointer") || name.contains("plus")) {
 
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 45, 45, false);
 
             try {
-                out = new FileOutputStream(fBimap);
+                out = new FileOutputStream(fBitmap);
                 scaledBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -457,7 +456,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             Bitmap scaledBitmap1 = Bitmap.createScaledBitmap(bitmap, 90, 90, false);
 
             try {
-                out = new FileOutputStream(fBimap);
+                out = new FileOutputStream(fBitmap);
                 scaledBitmap1.compress(Bitmap.CompressFormat.PNG, 100, out);
             } catch (Exception e) {
                 e.printStackTrace();

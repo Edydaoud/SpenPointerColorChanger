@@ -1,33 +1,39 @@
 package com.googy.spcc;
 
-
 import android.content.res.XResources;
+import android.content.res.XResources.DrawableLoader;
 import android.graphics.drawable.Drawable;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookZygoteInit;
-import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
-public class XposedClass implements IXposedHookZygoteInit, IXposedHookLoadPackage {
+public class XposedClass
+        implements IXposedHookZygoteInit, IXposedHookInitPackageResources {
 
     String[] fileName = GetArray.fileName;
     String[] resources = GetArray.resources;
 
-
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
-        for (int i = 0; i < 19; i++) {
-            final Drawable myDrawable = Drawable.createFromPath("/data/data/com.googy.spcc/files/" + fileName[i] + ".png");
-            XResources.setSystemWideReplacement("android", "drawable", resources[i], new XResources.DrawableLoader() {
-                @Override
-                public Drawable newDrawable(XResources res, int id) throws Throwable {
-                    return myDrawable;
-                }
-            });
-        }
+        for (int i = 0; i < 19; i++)
+            try {
+                final Drawable myDrawable = Drawable.createFromPath("/data/data/com.googy.spcc/files/" + fileName[i] + ".png");
+                XResources.setSystemWideReplacement("android", "drawable", resources[i], new DrawableLoader() {
+                    @Override
+                    public Drawable newDrawable(XResources res, int id) throws Throwable {
+                        return myDrawable;
+                    }
+                });
+
+            } catch (Throwable ignored) {
+
+            }
     }
 
-    public void handleLoadPackage(final LoadPackageParam lpparam) throws Throwable {
+    @Override
+    public void handleInitPackageResources(InitPackageResourcesParam resparam) throws Throwable {
 
     }
+
 }

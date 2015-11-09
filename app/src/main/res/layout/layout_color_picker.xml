@@ -1,159 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:background="#FFFFFF"
-	android:orientation="vertical"
-	tools:context=".ColorPickerActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".ColorPickerActivity">
 
-	<View
-		android:id="@+id/colorView"
-		android:layout_width="fill_parent"
-		android:layout_height="150dp"/>
+    <View
+        android:id="@+id/colorView"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp" />
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="5sp"
-		android:text="@string/look_like"/>
+        android:text="@string/look_like" />
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5sp"
-		android:gravity="center_horizontal"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-		<ImageView
-			android:id="@+id/preview"
+        <ImageView
+            android:id="@+id/preview"
             android:layout_width="250sp"
             android:layout_height="35sp"
-			android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/preview" />
 
-	</LinearLayout>
+    </LinearLayout>
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_horizontal"
-		android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
-		<Button
-			android:id="@+id/cancelButton"
-			style="?android:borderlessButtonStyle"
-			android:layout_width="100dp"
-			android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/cancelButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:text="@string/cancel" />
 
-		<Button
-			android:id="@+id/applyButton"
-			style="?android:borderlessButtonStyle"
-			android:layout_width="100dp"
-			android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/applyButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/apply" />
 
-	</LinearLayout>
+    </LinearLayout>
 
-	<RelativeLayout
-		android:layout_width="fill_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1"
-		android:background="@color/white"
-		android:paddingBottom="@dimen/activity_vertical_margin"
-		android:paddingLeft="@dimen/activity_horizontal_margin"
-		android:paddingRight="@dimen/activity_horizontal_margin"
-		android:paddingTop="@dimen/activity_vertical_margin">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-		<TextView
-			android:id="@+id/redToolTip"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:fontFamily="sans-serif-medium"
-			android:singleLine="true"
-			android:textColor="@color/red"
-			android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/redToolTip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:textColor="@color/red"
+            android:textSize="18sp" />
 
-		<SeekBar
-			android:id="@+id/redSeekBar"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/redToolTip"
-			android:max="255"
-			android:maxHeight="3dip"
-			android:minHeight="3dip"
-			android:progressDrawable="@drawable/red_progress"
-			android:thumbTint="@color/red"/>
+        <SeekBar
+            android:id="@+id/redSeekBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/redToolTip"
+            android:max="255"
+            android:maxHeight="3dip"
+            android:minHeight="3dip"
+            android:progressDrawable="@drawable/red_progress"
+            android:thumbTint="@color/red" />
 
-		<TextView
-			android:id="@+id/greenToolTip"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/redSeekBar"
-			android:fontFamily="sans-serif-medium"
-			android:singleLine="true"
-			android:textColor="@color/green"
-			android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/greenToolTip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/redSeekBar"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:textColor="@color/green"
+            android:textSize="18sp" />
 
-		<SeekBar
-			android:id="@+id/greenSeekBar"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/greenToolTip"
-			android:max="255"
-			android:maxHeight="3dip"
-			android:minHeight="3dip"
-			android:progressDrawable="@drawable/green_progress"
-			android:thumbTint="@color/green"/>
+        <SeekBar
+            android:id="@+id/greenSeekBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/greenToolTip"
+            android:max="255"
+            android:maxHeight="3dip"
+            android:minHeight="3dip"
+            android:progressDrawable="@drawable/green_progress"
+            android:thumbTint="@color/green" />
 
-		<TextView
-			android:id="@+id/blueToolTip"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/greenSeekBar"
-			android:fontFamily="sans-serif-medium"
-			android:singleLine="true"
-			android:textColor="@color/blue"
-			android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/blueToolTip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/greenSeekBar"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:textColor="@color/blue"
+            android:textSize="18sp" />
 
-		<SeekBar
-			android:id="@+id/blueSeekBar"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/blueToolTip"
-			android:max="255"
-			android:maxHeight="3dip"
-			android:minHeight="3dip"
-			android:progressDrawable="@drawable/blue_progress"
-			android:thumbTint="@color/blue"/>
+        <SeekBar
+            android:id="@+id/blueSeekBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/blueToolTip"
+            android:max="255"
+            android:maxHeight="3dip"
+            android:minHeight="3dip"
+            android:progressDrawable="@drawable/blue_progress"
+            android:thumbTint="@color/blue" />
 
-		<Button
-			android:id="@+id/buttonSelector"
-			android:layout_width="150dp"
-			android:layout_height="35dp"
-			android:layout_alignParentBottom="true"
-			android:layout_centerHorizontal="true"
-			android:background="@drawable/color_button"
-			android:fontFamily="sans-serif-condensed"
-			android:onClick="colorSelect"
-			android:textAllCaps="false"
-			android:textSize="15sp"/>
+        <Button
+            android:id="@+id/buttonSelector"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/color_button"
+            android:fontFamily="sans-serif-condensed"
+            android:onClick="colorSelect"
+            android:textAllCaps="false"
+            android:textSize="15sp" />
 
-	</RelativeLayout>
+    </RelativeLayout>
 
-	<Button
-		android:id="@+id/about"
-		style="?android:borderlessButtonStyle"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:background="@drawable/about_button"
-		android:onClick="showDetails"
-		android:text="@string/about"/>
+    <Button
+        android:id="@+id/about"
+        style="?android:borderlessButtonStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/about_button"
+        android:onClick="showDetails"
+        android:text="@string/about" />
 
 </LinearLayout>
 
