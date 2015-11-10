@@ -1,2 +1,2 @@
-# SpenPointerColorChanger
-Xposes module to change Spen pointer color on any Samsung Galaxy Note device.
+# SpenPointerToolbox
+Xposes module to change Spen pointer color or replace with custom one on any Samsung Galaxy Note device.
