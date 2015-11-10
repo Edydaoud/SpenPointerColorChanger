@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -55,11 +56,35 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     Rect thumbRect;
     AlertDialog alertDialog;
 
+    public static void saveBitmap(Context mContext, Bitmap bitmap, String name, int h, int w) {
+        String appPath = mContext.getFilesDir().getAbsolutePath();
+
+        File storagePath = new File(appPath);
+        File fBitmap = new File(storagePath, File.separator + name + ".png");
+        FileOutputStream out = null;
+        Bitmap scaledBitmap1 = Bitmap.createScaledBitmap(bitmap, h, w, false);
+
+        try {
+            out = new FileOutputStream(fBitmap);
+            scaledBitmap1.compress(Bitmap.CompressFormat.PNG, 100, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final Context mContext = getApplicationContext();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setContentView(R.layout.layout_color_picker);
@@ -69,7 +94,8 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         display = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
-        SharedPreferences settings = getSharedPreferences("COLOR_SETTINGS", 0);
+        final SharedPreferences settings = getSharedPreferences("COLOR_SETTINGS", 0);
+        final SharedPreferences appSettings = getSharedPreferences("APP_SETTINGS", 0);
         red = settings.getInt("RED_COLOR", 0);
         green = settings.getInt("GREEN_COLOR", 0);
         blue = settings.getInt("BLUE_COLOR", 0);
@@ -115,7 +141,11 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         final Button applyButton = (Button) findViewById(R.id.applyButton);
         applyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                onApply();
+                if (appSettings.getBoolean("CheckBoxColor", true))
+                    onApply();
+                else {
+                    Toast.makeText(mContext, "Activate pointer color first", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -375,8 +405,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         editor.apply();
 
-        for (int i = 0; i < 19; i++)
-            getBitmap(i, hex);
+        for (int i = 0; i < 19; i++) getBitmap(i, hex);
 
         Toast.makeText(this, "Don't forget to reboot", Toast.LENGTH_SHORT).show();
 
@@ -409,17 +438,20 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             //do nothing
         }
 
+        new java.io.File("/data/data/com.googy.spcc/shared_prefs/APP_SETTINGS.xml").setReadable(true, false);
+
     }
 
     public void getBitmap(int i, String color) {
-        int[] resourcesId = GetArray.resourcesId;
-
+        TypedArray resourcesId = getResources().obtainTypedArray(R.array.pointer);
+        TypedArray customPointerId = getResources().obtainTypedArray(R.array.custom_pointer);
         Context mContext = getApplicationContext();
 
-        String name = mContext.getResources().getResourceEntryName(resourcesId[i]);
+        String name = mContext.getResources().getResourceEntryName(resourcesId.getResourceId(i, 0));
+        SharedPreferences settings = getSharedPreferences("APP_SETTINGS", 0);
 
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),
-                resourcesId[i]).copy(Bitmap.Config.ARGB_8888, true);
+                resourcesId.getResourceId(i, 0)).copy(Bitmap.Config.ARGB_8888, true);
 
         Paint paint = new Paint();
         ColorFilter filter = new PorterDuffColorFilter(Color.parseColor(color), PorterDuff.Mode.SRC_IN);
@@ -428,48 +460,22 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         Canvas canvasPointer = new Canvas(bitmap);
         canvasPointer.drawBitmap(bitmap, 0, 0, paint);
 
-
-        String appPath = mContext.getFilesDir().getAbsolutePath();
-
-        File storagePath = new File(appPath);
-        File fBitmap = new File(storagePath, File.separator + name + ".png");
-        FileOutputStream out = null;
-        if (name.contains("pointer") || name.contains("plus")) {
-
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 45, 45, false);
-
-            try {
-                out = new FileOutputStream(fBitmap);
-                scaledBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (out != null) {
-                        out.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        if (name.equals("pointer")) {
+            i = settings.getInt("CustomPointer", 0);
+            if (settings.getBoolean("CheckBoxPointer", true)) {
+                bitmap = BitmapFactory.decodeResource(mContext.getResources(),
+                        customPointerId.getResourceId(i, 0)).copy(Bitmap.Config.ARGB_8888, true);
+                saveBitmap(mContext, bitmap, name, 40, 40);
+            } else {
+                saveBitmap(mContext, bitmap, name, 40, 40);
             }
+        } else if (name.contains("pointer_hover") || name.contains("plus")) {
+            saveBitmap(mContext, bitmap, name, 40, 40);
         } else {
-            Bitmap scaledBitmap1 = Bitmap.createScaledBitmap(bitmap, 90, 90, false);
-
-            try {
-                out = new FileOutputStream(fBitmap);
-                scaledBitmap1.compress(Bitmap.CompressFormat.PNG, 100, out);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (out != null) {
-                        out.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            saveBitmap(mContext, bitmap, name, 90, 90);
         }
+        resourcesId.recycle();
+        customPointerId.recycle();
 
     }
 }

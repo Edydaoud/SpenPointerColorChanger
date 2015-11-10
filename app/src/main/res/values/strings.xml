@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Spen Pointer Color Changer</string>
+    <string name="app_name">Spen Pointer Toolbox</string>
     <string name="look_like">THIS HOW IT LOOKS LIKE</string>
     <string name="color_picker">Material Color Picker</string>
     <string name="hello_world">Hello world!</string>
@@ -22,5 +22,12 @@
     <string name="apply">APPLY</string>
     <string name="cancel">CANCEL</string>
     <string name="change_color">CHANGE COLOR</string>
+    <string name="change_pointer">CHANGE POINTER</string>
+    <string name="currentPointer">Current Pointer</string>
+    <string name="xposed_color_checkbox_enable">ENABLE XPOSED SPEN POINTER COLOR</string>
+    <string name="xposed_color_checkbox_disable">DISABLE XPOSED SPEN POINTER COLOR</string>
+    <string name="xposed_pointer_checkbox_enable">ENABLE XPOSED SPEN CUSTOM POINTER</string>
+    <string name="xposed_pointer_checkbox_disable">DISABLE XPOSED SPEN CUSTOM POINTER</string>
+    <string name="xposed_settings">XPOSED SETTINGS</string>
 
 </resources>

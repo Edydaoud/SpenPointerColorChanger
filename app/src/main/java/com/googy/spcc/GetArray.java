@@ -31,14 +31,4 @@ public class GetArray {
             "tw_pointer_scroll_hovering_spen_pointer01_dark",
             "tw_pointer_spot_hovering_spen_split01_dark"};
 
-    public static int resourcesId[] = {
-            R.drawable.down, R.drawable.left,
-            R.drawable.left_down, R.drawable.left_right_split,
-            R.drawable.left_up, R.drawable.move,
-            R.drawable.plus, R.drawable.pointer,
-            R.drawable.pointer_hover, R.drawable.resize_left,
-            R.drawable.resize_left_right, R.drawable.resize_right,
-            R.drawable.resize_up_down, R.drawable.right,
-            R.drawable.right_down, R.drawable.right_up, R.drawable.select,
-            R.drawable.up, R.drawable.up_down_split};
 }

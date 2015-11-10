@@ -13,7 +13,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -21,6 +22,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 public class MainActivity extends Activity {
 
     AlertDialog alertDialog;
+    CheckBox colorCheckbox, pointerCheckbox;
+    SharedPreferences settings;
+    TextView pointerTextView, colorTextView, xposedSettingTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +40,19 @@ public class MainActivity extends Activity {
                 finish();
             }
         });
-
+        final Button changePointer = (Button) findViewById(R.id.changePointer);
+        changePointer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PointerChooser.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         setColorValue();
         setColor();
+        setCheckbox();
+
+        new java.io.File("/data/data/com.googy.spcc/shared_prefs/APP_SETTINGS.xml").setReadable(true, false);
 
     }
 
@@ -104,27 +118,33 @@ public class MainActivity extends Activity {
 
     public void setColorValue() {
 
-        SharedPreferences settings = getSharedPreferences("COLOR_SETTINGS", 0);
-
+        SharedPreferences colorSettings = getSharedPreferences("COLOR_SETTINGS", 0);
+        SharedPreferences appSettings = getSharedPreferences("APP_SETTINGS", 0);
         int red = 35;
         int green = 111;
         int blue = 130;
 
         String hex = String.format("#%02x%02x%02x", red, green, blue);
 
-        if (!settings.contains
+        if (!appSettings.contains
                 ("firstStart")) {
 
-            SharedPreferences.Editor editor = settings.edit();
+            SharedPreferences.Editor colorEditor = colorSettings.edit();
 
-            editor.putInt("RED_COLOR", red);
-            editor.putInt("GREEN_COLOR", green);
+            colorEditor.putInt("RED_COLOR", red);
+            colorEditor.putInt("GREEN_COLOR", green);
 
-            editor.putInt("BLUE_COLOR", blue);
-            editor.putString("HEX_COLOR", hex);
+            colorEditor.putInt("BLUE_COLOR", blue);
+            colorEditor.putString("HEX_COLOR", hex);
+            colorEditor.apply();
 
-            editor.putBoolean("firstStart", true);
-            editor.apply();
+            SharedPreferences.Editor settingsEditor = appSettings.edit();
+
+            settingsEditor.putBoolean("firstStart", true);
+            settingsEditor.putInt("CustomPointer", 0);
+            settingsEditor.putBoolean("CheckBoxColor", false).apply();
+            settingsEditor.putBoolean("CheckBoxPointer", false).apply();
+            settingsEditor.apply();
         }
     }
 
@@ -136,19 +156,26 @@ public class MainActivity extends Activity {
         int green = settings.getInt("GREEN_COLOR", 0);
         int blue = settings.getInt("BLUE_COLOR", 0);
 
-        RelativeLayout li = (RelativeLayout) findViewById(R.id.main_layout);
+        LinearLayout li = (LinearLayout) findViewById(R.id.main_layout);
         li.setBackgroundColor(Color.rgb(red, green, blue));
 
         Button changeColor = (Button) findViewById(R.id.changeColor);
-
+        Button changePointer = (Button) findViewById(R.id.changePointer);
         Button aboutspcc = (Button) findViewById(R.id.aboutspcc);
+        xposedSettingTextView = (TextView) findViewById(R.id.xposedSettings);
+
+        colorTextView = (TextView) findViewById(R.id.colorTextView);
+        pointerTextView = (TextView) findViewById(R.id.pointerTextView);
 
         TextView mainText = (TextView) findViewById(R.id.mainText);
 
         int color = red + green + blue;
 
         if (color < 650) {
-
+            xposedSettingTextView.setTextColor(Color.rgb(255, 255, 255));
+            colorTextView.setTextColor(Color.rgb(255, 255, 255));
+            pointerTextView.setTextColor(Color.rgb(255, 255, 255));
+            changePointer.setTextColor(Color.rgb(255, 255, 255));
             aboutspcc.setTextColor(Color.rgb(255, 255, 255));
             changeColor.setTextColor(Color.rgb(255, 255, 255));
             mainText.setTextColor(Color.rgb(255, 255, 255));
@@ -169,4 +196,61 @@ public class MainActivity extends Activity {
 
     }
 
+    public void onCheckboxClicked(View view) {
+
+        settings = getSharedPreferences("APP_SETTINGS", 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch (view.getId()) {
+            case R.id.checkBoxColor:
+                if (checked) {
+                    editor.putBoolean("CheckBoxColor", true).apply();
+                } else
+                    editor.putBoolean("CheckBoxColor", false).apply();
+                break;
+            case R.id.checkBoxPointer:
+                if (checked) {
+                    editor.putBoolean("CheckBoxPointer", true).apply();
+                } else
+                    editor.putBoolean("CheckBoxPointer", false).apply();
+                break;
+        }
+        setCheckbox();
+
+    }
+
+    public void setCheckbox() {
+
+        settings = getSharedPreferences("APP_SETTINGS", 0);
+
+        colorCheckbox = (CheckBox) findViewById(R.id.checkBoxColor);
+        pointerCheckbox = (CheckBox) findViewById(R.id.checkBoxPointer);
+        colorTextView = (TextView) findViewById(R.id.colorTextView);
+        pointerTextView = (TextView) findViewById(R.id.pointerTextView);
+
+        if (settings.getBoolean("CheckBoxColor", true)) {
+            colorCheckbox.setChecked(true);
+            colorTextView.setText(R.string.xposed_color_checkbox_disable);
+        } else {
+            colorCheckbox.setChecked(false);
+            colorTextView.setText(R.string.xposed_color_checkbox_enable);
+        }
+        if (settings.getBoolean("CheckBoxPointer", true)) {
+            pointerCheckbox.setChecked(true);
+            pointerTextView.setText(R.string.xposed_pointer_checkbox_disable);
+        } else {
+            pointerCheckbox.setChecked(false);
+            pointerTextView.setText(R.string.xposed_pointer_checkbox_enable);
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        new java.io.File("/data/data/com.googy.spcc/shared_prefs/APP_SETTINGS.xml").setReadable(true, false);
+    }
 }

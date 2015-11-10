@@ -31,8 +31,8 @@
             android:layout_width="250sp"
             android:layout_height="35sp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/preview"
-            android:contentDescription="Preview Image" />
+            android:contentDescription="Preview Image"
+            android:src="@drawable/preview" />
 
     </LinearLayout>
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pointer">
+        <item>@drawable/down</item>
+        <item>@drawable/left</item>
+        <item>@drawable/left_down</item>
+        <item>@drawable/left_right_split</item>
+        <item>@drawable/left_up</item>
+        <item>@drawable/move</item>
+        <item>@drawable/plus</item>
+        <item>@drawable/pointer</item>
+        <item>@drawable/pointer_hover</item>
+        <item>@drawable/resize_left</item>
+        <item>@drawable/resize_left_right</item>
+        <item>@drawable/resize_right</item>
+        <item>@drawable/resize_up_down</item>
+        <item>@drawable/right</item>
+        <item>@drawable/right_down</item>
+        <item>@drawable/right_up</item>
+        <item>@drawable/select</item>
+        <item>@drawable/up</item>
+        <item>@drawable/up_down_split</item>
+    </array>
+    <integer-array name="custom_pointer">
+        <item>@drawable/emoji_beer</item>
+        <item>@drawable/emoji_cool</item>
+        <item>@drawable/emoji_finger_index</item>
+        <item>@drawable/emoji_heart</item>
+        <item>@drawable/emoji_heart_bleeding</item>
+        <item>@drawable/emoji_heart_shaped_eyes</item>
+        <item>@drawable/emoji_laughing</item>
+        <item>@drawable/emoji_middle_finger</item>
+        <item>@drawable/emoji_money</item>
+        <item>@drawable/emoji_moon</item>
+        <item>@drawable/emoji_muscle</item>
+        <item>@drawable/emoji_peace</item>
+        <item>@drawable/emoji_poo</item>
+        <item>@drawable/emoji_rock</item>
+        <item>@drawable/emoji_run</item>
+        <item>@drawable/emoji_sun</item>
+        <item>@drawable/emoji_tongue</item>
+        <item>@drawable/emoji_x</item>
+    </integer-array>
+</resources>
