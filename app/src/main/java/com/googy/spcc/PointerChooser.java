@@ -8,11 +8,13 @@ import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class PointerChooser extends Activity {
@@ -33,6 +35,7 @@ public class PointerChooser extends Activity {
         settings = mContext.getSharedPreferences("APP_SETTINGS", 0);
 
         preview = (ImageView) findViewById(R.id.CurrentPointer);
+        setColor();
 
         if (settings.getBoolean("CheckBoxPointer", true)) {
             preview.setImageResource(resourcesId.getResourceId(settings.getInt("CustomPointer", 0), 0));
@@ -70,6 +73,17 @@ public class PointerChooser extends Activity {
 
     }
 
+    private void setColor() {
+        SharedPreferences settings = getSharedPreferences("COLOR_SETTINGS", 0);
+
+        int red = settings.getInt("RED_COLOR", 0);
+        int green = settings.getInt("GREEN_COLOR", 0);
+        int blue = settings.getInt("BLUE_COLOR", 0);
+
+        LinearLayout li = (LinearLayout) findViewById(R.id.pointerChooser);
+        li.setBackgroundColor(Color.rgb(red, green, blue));
+    }
+
     @Override
     public void onBackPressed() {
 
@@ -98,6 +112,6 @@ public class PointerChooser extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        new java.io.File("/data/data/com.googy.spcc/shared_prefs/APP_SETTINGS.xml").setReadable(true, false);
+        new java.io.File(Common.appPrefs).setReadable(true, false);
     }
 }

@@ -24,7 +24,9 @@ public class MainActivity extends Activity {
     AlertDialog alertDialog;
     CheckBox colorCheckbox, pointerCheckbox;
     SharedPreferences settings;
-    TextView pointerTextView, colorTextView, xposedSettingTextView;
+    TextView pointerTextView, colorTextView, xposedSettingTextView, mainText;
+    Button changeColor, changePointer, aboutSpcc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,6 @@ public class MainActivity extends Activity {
         setColorValue();
         setColor();
         setCheckbox();
-
-        new java.io.File("/data/data/com.googy.spcc/shared_prefs/APP_SETTINGS.xml").setReadable(true, false);
-
     }
 
     public void about_spcc(View view) {
@@ -140,7 +139,7 @@ public class MainActivity extends Activity {
 
             SharedPreferences.Editor settingsEditor = appSettings.edit();
 
-            settingsEditor.putBoolean("firstStart", true);
+            settingsEditor.putBoolean("firstStart", false);
             settingsEditor.putInt("CustomPointer", 0);
             settingsEditor.putBoolean("CheckBoxColor", false).apply();
             settingsEditor.putBoolean("CheckBoxPointer", false).apply();
@@ -159,26 +158,27 @@ public class MainActivity extends Activity {
         LinearLayout li = (LinearLayout) findViewById(R.id.main_layout);
         li.setBackgroundColor(Color.rgb(red, green, blue));
 
-        Button changeColor = (Button) findViewById(R.id.changeColor);
-        Button changePointer = (Button) findViewById(R.id.changePointer);
-        Button aboutspcc = (Button) findViewById(R.id.aboutspcc);
+        changeColor = (Button) findViewById(R.id.changeColor);
+        changePointer = (Button) findViewById(R.id.changePointer);
+        aboutSpcc = (Button) findViewById(R.id.aboutspcc);
         xposedSettingTextView = (TextView) findViewById(R.id.xposedSettings);
 
         colorTextView = (TextView) findViewById(R.id.colorTextView);
         pointerTextView = (TextView) findViewById(R.id.pointerTextView);
 
-        TextView mainText = (TextView) findViewById(R.id.mainText);
+        mainText = (TextView) findViewById(R.id.mainText);
 
         int color = red + green + blue;
 
         if (color < 650) {
-            xposedSettingTextView.setTextColor(Color.rgb(255, 255, 255));
-            colorTextView.setTextColor(Color.rgb(255, 255, 255));
-            pointerTextView.setTextColor(Color.rgb(255, 255, 255));
-            changePointer.setTextColor(Color.rgb(255, 255, 255));
-            aboutspcc.setTextColor(Color.rgb(255, 255, 255));
-            changeColor.setTextColor(Color.rgb(255, 255, 255));
-            mainText.setTextColor(Color.rgb(255, 255, 255));
+
+            xposedSettingTextView.setTextColor(Common.colorWhite);
+            colorTextView.setTextColor(Common.colorWhite);
+            pointerTextView.setTextColor(Common.colorWhite);
+            changePointer.setTextColor(Common.colorWhite);
+            aboutSpcc.setTextColor(Common.colorWhite);
+            changeColor.setTextColor(Common.colorWhite);
+            mainText.setTextColor(Common.colorWhite);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -251,6 +251,6 @@ public class MainActivity extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        new java.io.File("/data/data/com.googy.spcc/shared_prefs/APP_SETTINGS.xml").setReadable(true, false);
+        new java.io.File(Common.appPrefs).setReadable(true, false);
     }
 }

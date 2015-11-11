@@ -12,8 +12,8 @@ import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResou
 public class XposedClass
         implements IXposedHookZygoteInit, IXposedHookInitPackageResources {
 
-    String[] fileName = GetArray.fileName;
-    String[] resources = GetArray.resources;
+    String[] fileName = Common.fileName;
+    String[] resources = Common.resources;
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -25,7 +25,7 @@ public class XposedClass
         if (isColorChecked) {
             for (int i = 0; i < 19; i++)
                 try {
-                    final Drawable myDrawable = Drawable.createFromPath("/data/data/com.googy.spcc/files/" + fileName[i] + ".png");
+                    final Drawable myDrawable = Drawable.createFromPath(Common.filesDir + fileName[i] + ".png");
                     XResources.setSystemWideReplacement("android", "drawable", resources[i], new DrawableLoader() {
                         @Override
                         public Drawable newDrawable(XResources res, int id) throws Throwable {
@@ -39,7 +39,7 @@ public class XposedClass
         }
         if (isPointerChecked) {
             try {
-                final Drawable myDrawable = Drawable.createFromPath("/data/data/com.googy.spcc/files/pointer.png");
+                final Drawable myDrawable = Drawable.createFromPath(Common.filesDir + "pointer.png");
                 XResources.setSystemWideReplacement("android", "drawable", "tw_pointer_spot_hovering_spen", new DrawableLoader() {
                     @Override
                     public Drawable newDrawable(XResources res, int id) throws Throwable {

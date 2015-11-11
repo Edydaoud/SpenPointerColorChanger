@@ -40,5 +40,30 @@
         <item>@drawable/emoji_sun</item>
         <item>@drawable/emoji_tongue</item>
         <item>@drawable/emoji_x</item>
+        <item>@drawable/emoji_angel</item>
+        <item>@drawable/emoji_angry</item>
+        <item>@drawable/emoji_bomb</item>
+        <item>@drawable/emoji_brush</item>
+        <item>@drawable/emoji_circle</item>
+        <item>@drawable/emoji_earth</item>
+        <item>@drawable/emoji_evil</item>
+        <item>@drawable/emoji_hand</item>
+        <item>@drawable/emoji_hello</item>
+        <item>@drawable/emoji_lollipop</item>
+        <item>@drawable/emoji_love</item>
+        <item>@drawable/emoji_pen</item>
+        <item>@drawable/emoji_pin</item>
+        <item>@drawable/emoji_police</item>
+        <item>@drawable/emoji_punch</item>
+        <item>@drawable/emoji_robot</item>
+        <item>@drawable/emoji_skull</item>
+        <item>@drawable/emoji_spider</item>
+        <item>@drawable/emoji_star</item>
+        <item>@drawable/emoji_stop</item>
+        <item>@drawable/emoji_stylo</item>
+        <item>@drawable/emoji_thumbsup</item>
+        <item>@drawable/emoji_thunder</item>
+        <item>@drawable/emoji_warning</item>
+        <item>@drawable/emoji_write</item>
     </integer-array>
 </resources>

@@ -56,29 +56,6 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     Rect thumbRect;
     AlertDialog alertDialog;
 
-    public static void saveBitmap(Context mContext, Bitmap bitmap, String name, int h, int w) {
-        String appPath = mContext.getFilesDir().getAbsolutePath();
-
-        File storagePath = new File(appPath);
-        File fBitmap = new File(storagePath, File.separator + name + ".png");
-        FileOutputStream out = null;
-        Bitmap scaledBitmap1 = Bitmap.createScaledBitmap(bitmap, h, w, false);
-
-        try {
-            out = new FileOutputStream(fBitmap);
-            scaledBitmap1.compress(Bitmap.CompressFormat.PNG, 100, out);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -438,7 +415,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             //do nothing
         }
 
-        new java.io.File("/data/data/com.googy.spcc/shared_prefs/APP_SETTINGS.xml").setReadable(true, false);
+        new java.io.File(Common.appPrefs).setReadable(true, false);
 
     }
 
@@ -476,6 +453,29 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         }
         resourcesId.recycle();
         customPointerId.recycle();
+    }
 
+    public static void saveBitmap(Context mContext, Bitmap bitmap, String name, int h, int w) {
+        String appPath = mContext.getFilesDir().getAbsolutePath();
+
+        File storagePath = new File(appPath);
+        File fBitmap = new File(storagePath, File.separator + name + ".png");
+        FileOutputStream out = null;
+        Bitmap scaledBitmap1 = Bitmap.createScaledBitmap(bitmap, h, w, false);
+
+        try {
+            out = new FileOutputStream(fBitmap);
+            scaledBitmap1.compress(Bitmap.CompressFormat.PNG, 100, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

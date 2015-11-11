@@ -23,7 +23,7 @@
     <string name="cancel">CANCEL</string>
     <string name="change_color">CHANGE COLOR</string>
     <string name="change_pointer">CHANGE POINTER</string>
-    <string name="currentPointer">Current Pointer</string>
+    <string name="currentPointer">CURRENT POINTER</string>
     <string name="xposed_color_checkbox_enable">ENABLE XPOSED SPEN POINTER COLOR</string>
     <string name="xposed_color_checkbox_disable">DISABLE XPOSED SPEN POINTER COLOR</string>
     <string name="xposed_pointer_checkbox_enable">ENABLE XPOSED SPEN CUSTOM POINTER</string>

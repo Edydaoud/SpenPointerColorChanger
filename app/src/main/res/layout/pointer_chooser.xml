@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/pointerChooser">
 
     <TextView
         android:id="@+id/CurrentPointerTextView"
@@ -13,13 +14,23 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/currentPointer" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
     <ImageView
         android:id="@+id/CurrentPointer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
     <GridView
         android:id="@+id/grid"
