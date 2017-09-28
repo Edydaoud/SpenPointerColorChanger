@@ -8,7 +8,7 @@ env:
     - ANDROID_BUILD_TOOLS_VERSION=23.0.1
     - ADB_INSTALL_TIMEOUT=20 # install timeout in minutes (2 minutes by default)
   matrix:
-    - ANDROID_TARGET=android-23
+    - ANDROID_TARGET=android-25
     
 android:
   components:
