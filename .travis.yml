@@ -1,12 +1,22 @@
 language: android
+
 jdk:
   - oraclejdk8
+  
+env:
+  global:
+    - ANDROID_BUILD_TOOLS_VERSION=25.0.2
+    - ADB_INSTALL_TIMEOUT=20 # install timeout in minutes (2 minutes by default)
+  matrix:
+    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+    
 android:
   components:
     - tools # to get the new `repository-11.xml`
     - tools # to install new Android SDK tools
     - platform-tools
-    - build-tools-23.0.1
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - $ANDROID_TARGET
     - android-25
 
     # Support library
